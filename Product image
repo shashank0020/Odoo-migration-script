@@ -1,0 +1,44 @@
+import Image
+import os
+import StringIO
+import glob
+import xmlrpclib
+import binascii
+#LOGIN DETAILS
+#ENTER YOUR LOGIN CREDENTIAL TO CONNECT
+username = 'admin'
+password = 'joan'
+database = 'april1'
+sock_comm = xmlrpclib.ServerProxy('http://yourdomain/xmlrpc/common')
+#sock_comm = xmlrpclib.ServerProxy('http://yourdomain/xmlrpc/common')
+uid = sock_comm.login(database,username,password)
+sock = xmlrpclib.ServerProxy('http://yourdomain/xmlrpc/object')
+#sock = xmlrpclib.ServerProxy('http://yourdomain/xmlrpc/object')
+print "WOW !!CONNECTION SUCCESSFULL"
+
+
+files=glob.glob("image path":
+
+	file_name=os.path.basename(file1)
+	files_name,ext=file_name.split('.jpg')
+	print files_name
+	ids = sock.execute(database,uid, password,'product.product', 'search', [('default_code','=',files_name)])
+	#if ids:
+
+	for i in ids:
+		print 'product id=',i
+		print '*********************************READING IMAGE******************'
+		with open(file1, "rb") as f:
+		    data = f.read()
+		    bin_image=data.encode("base64")
+		print '*********************************STORING IMAGE******************'
+		dic={'image_medium':bin_image}
+		print '*********************************IMAGE STORED SUCCESSFULLY******************'
+		
+		sock.execute(database,uid, password,'product.product', 'write',i,dic)
+		
+	#else:
+
+		#print '********************NO PRODUCT FOUND*****************************'
+print '_______________________--------------GAME OVER-----------__________________________'
+	
